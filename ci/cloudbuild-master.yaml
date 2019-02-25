@@ -28,7 +28,7 @@ steps:
 # Test the Fibonacci server's endpoint
 - name: 'gcr.io/cloud-builders/curl'
   entrypoint: /bin/sh
-  args: ["/workspace/api_tests.sh"]
+  args: ["/workspace/ci/api_tests.sh"]
 
 
 
