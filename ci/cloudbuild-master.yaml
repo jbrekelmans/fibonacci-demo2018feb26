@@ -32,22 +32,15 @@ steps:
 
 
 
-# Update Kubernetes manifest
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: /bin/sh
-  args:
-  - -c
-  - sed -e 's|<<<IMAGE>>>|asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID|g' cd/deployment-template.yaml > cd/deployment.yaml
-# Git add + commit + push to trigger Kubernetes deployment
-- name: 'gcr.io/cloud-builders/git'
-  args: ["add", "cd/deployment.yaml"]
-- name: 'gcr.io/cloud-builders/git'
-  args: ["commit", "-m", "deployment from build $BUILD_ID"]
+##################
+# DEPLOYMENT
+##################
+# Update git authentication so that we can commit and push to trigger the deployment
 - name: ubuntu
   entrypoint: bash
   args: ["/workspace/ci/extract_oauth_token.sh"]
 - name: 'gcr.io/cloud-builders/git'
-  entrypoint: /bin/bash
+  entrypoint: bash
   args:
   - -c
   - |
@@ -55,7 +48,19 @@ steps:
     URL=$$(git remote get-url origin --push)
     URL=https://$$(cat token.txt)@$${URL#https://}
     git remote set-url --push origin "$$URL"
-    git push origin master
+# Update Kubernetes manifest
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: /bin/sh
+  args:
+  - -c
+  - sed -e 's|<<<IMAGE>>>|asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID|g' cd/deployment-template.yaml > cd/deployment.yaml
+# Git add + commit + push
+- name: 'gcr.io/cloud-builders/git'
+  args: ["add", "cd/deployment.yaml"]
+- name: 'gcr.io/cloud-builders/git'
+  args: ["commit", "-m", "deployment from build $BUILD_ID"]
+- name: 'gcr.io/cloud-builders/git'
+  args: ["push", "origin", "master"]
 
 images:
 - 'asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID'
