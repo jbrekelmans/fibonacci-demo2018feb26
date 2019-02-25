@@ -30,7 +30,7 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - |
+  - |+
     request () {
       OUTPUT=$(curl --silent --fail http://fibonacci-server:8080/?n="$$1") || exit
     }
@@ -40,3 +40,4 @@ steps:
 
 images:
 - asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID
+
