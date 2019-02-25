@@ -33,7 +33,9 @@ steps:
   - |
     set -x
     request () {
-      OUTPUT=$$(curl --silent --fail http://fibonacci-server:8080/?n="$$1") || exit
+      STATUS_CODE=$(curl --silent --verbose --output output.txt -w '%{http_code}' http://fibonacci-server:8080/?n="$$1")
+      [ "$STATUS_CODE" -eq 200 ] || exit
+      OUTPUT=$(cat output.txt)
     }
     request 0; [ "$$OUTPUT" = 'The 0th Fibonacci number is 0!' ] || exit
     request 1; [ "$$OUTPUT" = 'The 1st Fibonacci number is 1!' ] || exit
