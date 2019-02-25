@@ -1,7 +1,7 @@
 #!/bin/sh
 set -x
 test () {
-  STATUS_CODE=$(curl --silent --output output.txt -w '%{http_code}' http://fibonacci-server:$PORT/?n="$2")
+  STATUS_CODE=$(curl --silent --output output.txt -w '%{http_code}' http://fibonacci-server:8080/?n="$2")
   if [ "$STATUS_CODE" -ne "$1" ]; then 
     cat output.txt
     return 1
