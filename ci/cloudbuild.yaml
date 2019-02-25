@@ -20,6 +20,7 @@ steps:
 
 # Start Fibonacci server that we just built
 - name: 'docker/compose:1.23.2'
+  dir: ci
   env:
   - 'IMAGE=fibonacci-server:latest'
   args: ["up", "--detach", "waiter"]
@@ -27,4 +28,4 @@ steps:
 # Test the Fibonacci server's endpoint
 - name: 'gcr.io/cloud-builders/curl'
   entrypoint: /bin/sh
-  args: ["/workspace/api_tests.sh"]
+  args: ["/workspace/ci/api_tests.sh"]

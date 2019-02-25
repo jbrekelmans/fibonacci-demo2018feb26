@@ -20,6 +20,7 @@ steps:
 
 # Start Fibonacci server that we just built
 - name: 'docker/compose:1.23.2'
+  dir: ci
   env:
   - 'IMAGE=asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID'
   args: ["up", "--detach", "waiter"]
