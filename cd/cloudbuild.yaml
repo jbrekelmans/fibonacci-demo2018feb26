@@ -1,3 +1,9 @@
 steps:
-- name: asdf
-  asdf: asdf
+- name: gcr.io/cloud-builders/kubectl
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=australia-southeast1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=fibonacci-cluster'
+  args:
+  - apply
+  - -f
+  - cd/deployment.yaml

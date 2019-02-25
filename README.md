@@ -6,12 +6,15 @@ Introduction
     1. Learn about cloud build
     2. Learn a few useful tricks when you use it yourself
 
-Automated workflows declared in code
-  CI pipelines
-  Automated deployments
-
+Automated workflows as code
+  CI
+  GitOps style CD
+    https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
+  
+Benefits
   No management of agents and master required
     Runs on worker VMs managed by Google
+
 
 Difference with other CI tools
   Jenkins
