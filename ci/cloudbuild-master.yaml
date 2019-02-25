@@ -45,7 +45,7 @@ steps:
   args: ["commit", "-m", "deployment from build $BUILD_ID"]
 - name: ubuntu
   entrypoint: bash
-  args: /workspace/ci/extract_oauth_token.sh
+  args: ["/workspace/ci/extract_oauth_token.sh"]
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/bash
   args:
