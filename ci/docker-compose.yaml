@@ -3,7 +3,7 @@ services:
   fibonacci-server:
     container_name: fibonacci-server 
     image: $IMAGE
-    env:
+    environment:
     - PORT=8080
     healthcheck:
       test:
