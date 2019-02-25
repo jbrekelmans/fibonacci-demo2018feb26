@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+  fibonacci-server:
+    container_name: fibonacci-server 
+    image: $IMAGE
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - 'curl --fail http://localhost:$PORT/?n=0 || exit 1'
+      interval: 5s
+      timeout: 1s
+    ports:
+      - "$PORT:$PORT"
+
+  # helper service that will wait until fibonacci-server is ready to accept requests
+  waiter:
+    image: busybox
+    depends_on:
+      fibonacci-server:
+        condition: service_healthy
