@@ -18,3 +18,8 @@ services:
     depends_on:
       fibonacci-server:
         condition: service_healthy
+
+networks:
+    default:
+        external:
+            name: cloudbuild
