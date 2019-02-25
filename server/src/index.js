@@ -33,8 +33,8 @@ app.get('/', (req, res) => {
   const result = fibonacci(n)
   let suffix = 'th'
   const nMod10 = n % 10n
-  if (nMod10 === 1) suffix = 'st'
-  else if (nMod10 === 2) suffix = 'nd'
+  if (nMod10 === 1n) suffix = 'st'
+  else if (nMod10 === 2n) suffix = 'nd'
   res.status(200).send(`The ${n}${suffix} Fibonacci number is ${result}!`);
 });
 
