@@ -10,33 +10,30 @@ Automated workflows as code
   CI
   GitOps style CD
     https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
-  
-Benefits
+
+During demo
   No management of agents and master required
     Runs on worker VMs managed by Google
-
+  YAML is not as easy to program as Jenkinsfile
+    No conditional branching
+    SemVer requires that you override entrypoints with /bin/sh so that you can cat
+  Speeding up builds
+    Run in parallel
+    Set options.machineType to N1_HIGHCPU_32 (30GB, 32 CPUs)
+  Security
+    Build runs with IAM service account
+    Can use Google KMS to decrypt secrets for later use
 
 Difference with other CI tools
-  Jenkins
-    Manage master, plugins and agents
+  Manage master, plugins and agents
     Groovy (Scripted Pipeline) OR Declaritve
     Declarative
     Jenkins Pipeline Plugin
       Runs on master (node directive offloads works) 
 
-Parallel
-
-Pros/cons
-  Pros
-    Heavily coupled with GCP
-  Cons
-    Heavily coupled with GCP
-
-Speeding up builds
-  Run in parallel
-  Set options.machineType to N1_HIGHCPU_32 (30GB, 32 CPUs)
-
-Security
-  Build runs with IAM service account
-
+Conclusion
+  Infrastructure side is really easy
+  Rich ecosystem (docker)
+  Heavily coupled with GCP????
+  
 Debugging builds locally

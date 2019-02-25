@@ -43,8 +43,19 @@ steps:
   args: ["add", "cd/deployment.yaml"]
 - name: 'gcr.io/cloud-builders/git'
   args: ["commit", "-m", "deployment from build $BUILD_ID"]
+- name: ubuntu
+  entrypoint: bash
+  args: /workspace/ci/extract_oauth_token.sh
 - name: 'gcr.io/cloud-builders/git'
-  args: ["push", "origin", "master"]
+  entrypoint: /bin/bash
+  args:
+  - -c
+  - |
+    set -euo pipefail
+    URL=$(git remote get-url origin --push)
+    URL=https://$(cat token.txt)@${URL#https://}
+    git remote set-url --push origin "$URL"
+    git push origin master
 
 images:
 - 'asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID'
