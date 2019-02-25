@@ -6,8 +6,9 @@ metadata:
   name: fibonacci-server
 spec:
   replicas: 2
-  matchLabels:
-    app: fibonacci-server
+  selector:
+    matchLabels:
+      app: fibonacci-server
   strategy:
     type: RollingUpdate
     rollingUpdate:

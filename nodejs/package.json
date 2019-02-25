@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "mocha --exit 'src/**/*.test.js'"
+    "test": "node \"$(npm bin)\"/_mocha --exit 'src/**/*.test.js'"
   },
   "engines": {
     "node": ">=10"

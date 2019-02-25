@@ -6,8 +6,9 @@ metadata:
   name: fibonacci-server
 spec:
   replicas: 2
-  matchLabels:
-    app: fibonacci-server
+  selector:
+    matchLabels:
+      app: fibonacci-server
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -22,7 +23,7 @@ spec:
       - env:
         - name: PORT
           value: '8080'
-        image: <<<IMAGE>>>
+        image: 'asia.gcr.io/decoded-petal-232806/fibonacci-server:latest'
         imagePullPolicy: Always
         name: fibonacci-server
         ports:
