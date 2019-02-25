@@ -1,6 +1,10 @@
 Cloud Build
 
 Introduction
+  GCP training?
+  GOAL
+    1. Learn about cloud build
+    2. Learn a few useful tricks when you use it yourself
 
 Declarative workflow  
   CI pipelines
