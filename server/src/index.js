@@ -25,16 +25,17 @@ const app = express();
 app.get('/', (req, res) => {
   let n
   try {
-    n = BigInt(req.query.n)
+    n = BigInt(req.query.n);
   } catch (error) {
-    res.status(400).type('text').send('Query string parameter "n" is missing or invalid')
-    return
+    res.status(400).type('text').send('Query string parameter "n" is missing or invalid');
+    return;
   }
-  const result = fibonacci(n)
-  let suffix = 'th'
-  const nMod10 = n % 10n
-  if (nMod10 === 1n) suffix = 'st'
+  const result = fibonacci(n);
+  let suffix = 'th';
+  const nMod10 = n % 10n;
+  if (nMod10 === 1n) suffix = 'st';
   else if (nMod10 === 2n) suffix = 'nd'
+  else if (nMod10 === 3n) suffix = 'rd';
   res.status(200).send(`The ${n}${suffix} Fibonacci number is ${result}!`);
 });
 
