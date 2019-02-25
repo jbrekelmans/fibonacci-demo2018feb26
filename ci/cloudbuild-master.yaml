@@ -52,9 +52,9 @@ steps:
   - -c
   - |
     set -euo pipefail
-    URL=$(git remote get-url origin --push)
-    URL=https://$(cat token.txt)@${URL#https://}
-    git remote set-url --push origin "$URL"
+    URL=$$(git remote get-url origin --push)
+    URL=https://$$(cat token.txt)@$${URL#https://}
+    git remote set-url --push origin "$$URL"
     git push origin master
 
 images:
