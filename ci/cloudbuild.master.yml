@@ -1,0 +1,49 @@
+steps:
+# Install node modules
+- name: 'gcr.io/cloud-builders/npm:node-10.10.0'
+  dir: nodejs
+  env: ["NODE_ENV=development"]
+  args: ["install"]
+
+# Run unit tests
+- name: 'gcr.io/cloud-builders/npm:node-10.10.0'
+  dir: nodejs
+  args: ["test"]
+
+# Build docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - build
+  - --tag
+  - fibonacci-server:latest
+  - nodejs
+
+# Start Fibonacci server that we just built
+- name: 'docker/compose:1.23.2'
+  env:
+  - 'IMAGE=asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID'
+  args: ["up", "--detach", "waiter"]
+
+# Test the Fibonacci server's endpoint
+- name: 'gcr.io/cloud-builders/curl'
+  entrypoint: /bin/sh
+  args: ["/workspace/api_tests.sh"]
+
+
+
+# Update Kubernetes manifest
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: /bin/sh
+  args:
+  - -c
+  - sed -e 's|<<<IMAGE>>>|asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID|g' cd/deployment-template.yaml > cd/deployment.yaml
+# Git add + commit + push to trigger Kubernetes deployment
+- name: 'gcr.io/cloud-builders/git'
+  args: ["add", "cd/deployment.yaml"]
+- name: 'gcr.io/cloud-builders/git'
+  args: ["commit", "-m", "deployment from build $BUILD_ID"]
+- name: 'gcr.io/cloud-builders/git'
+  args: ["push", "origin", "master"]
+
+images:
+- 'asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID'

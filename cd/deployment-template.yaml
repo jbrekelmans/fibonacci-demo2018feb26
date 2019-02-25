@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fibonacci-server
+  name: fibonacci-server
+spec:
+  replicas: 2
+  matchLabels:
+    app: fibonacci-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 50%
+  template:
+    metadata:
+      labels:
+        app: fibonacci-server
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: '8080'
+        image: <<<IMAGE>>>
+        imagePullPolicy: Always
+        name: fibonacci-server
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 8080
+          periodSeconds: 5

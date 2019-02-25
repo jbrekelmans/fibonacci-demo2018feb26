@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fibonacci-server
+  name: fibonacci-server
+spec:
+  backend:
+    serviceName: fibonacci-server
+    servicePort: 8080

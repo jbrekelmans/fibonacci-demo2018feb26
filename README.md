@@ -15,6 +15,9 @@ Automated workflows declared in code
 
 Difference with other CI tools
   Jenkins
+    Manage master, plugins and agents
+    Groovy (Scripted Pipeline) OR Declaritve
+    Declarative
     Jenkins Pipeline Plugin
       Runs on master (node directive offloads works) 
 
@@ -26,8 +29,11 @@ Pros/cons
   Cons
     Heavily coupled with GCP
 
+Speeding up builds
+  Run in parallel
+  Set options.machineType to N1_HIGHCPU_32 (30GB, 32 CPUs)
+
 Security
   Build runs with IAM service account
-
 
 Debugging builds locally
