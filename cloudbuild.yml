@@ -25,6 +25,11 @@ steps:
   - "PORT=8080"
   args: ["up", "--detach", "waiter"]
 
+# Docker ps test
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - ps
+  
 # # Test the Fibonacci server's endpoint
 - name: 'gcr.io/cloud-builders/curl'
   entrypoint: /bin/sh
