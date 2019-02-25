@@ -15,7 +15,7 @@ steps:
   args:
   - build
   - --tag
-  - fibonacci-server:latest
+  - asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID
   - nodejs
 
 # Start Fibonacci server that we just built

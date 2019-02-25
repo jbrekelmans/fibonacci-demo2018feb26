@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   labels:
     app: fibonacci-server
-  name: fibonacci-server
+  name: fibonacci-server-ingress
 spec:
   backend:
     serviceName: fibonacci-server
