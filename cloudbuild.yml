@@ -26,17 +26,17 @@ steps:
   args: ["up", "--detach", "waiter"]
 
 # # Test the Fibonacci server's endpoint
-# - name: 'gcr.io/cloud-builders/curl'
-#   entrypoint: /bin/sh
-#   args:
-#   - -c
-#   - |
-#     request () {
-#       OUTPUT=$(curl --silent --fail http://fibonacci-server:8080/?n="$$1") || exit
-#     }
-#     request 0; [ "$OUTPUT" = 'The 0th Fibonacci number is 0!' ] || exit
-#     request 1; [ "$OUTPUT" = 'The 1st Fibonacci number is 1!' ] || exit
-#     request 2; [ "$OUTPUT" = 'The 2nd Fibonacci number is 2!' ] || exit
+- name: 'gcr.io/cloud-builders/curl'
+  entrypoint: /bin/sh
+  args:
+  - -c
+  - |
+    request () {
+      OUTPUT=$$(curl --silent --fail http://fibonacci-server:8080/?n="$$1") || exit
+    }
+    request 0; [ "$$OUTPUT" = 'The 0th Fibonacci number is 0!' ] || exit
+    request 1; [ "$$OUTPUT" = 'The 1st Fibonacci number is 1!' ] || exit
+    request 2; [ "$$OUTPUT" = 'The 2nd Fibonacci number is 2!' ] || exit
 
 images:
 - asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID
