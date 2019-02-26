@@ -35,10 +35,11 @@ steps:
 ##############
 # DEPLOYMENT #
 ##############
-# Update git authentication so that we can commit and push to trigger the deployment
+# Extract service account OAut2 token for use with git push
 - name: ubuntu
   entrypoint: bash
   args: ["/workspace/ci/extract_oauth_token.sh"]
+# Set git user, email and authentication
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: bash
   args:
@@ -51,8 +52,8 @@ steps:
     git config user.email '834370812683@cloudbuild.gserviceaccount.com'
     git config user.name cloudbuild
 # Update Kubernetes manifest
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: /bin/sh
+- name: ubuntu
+  entrypoint: bash
   args:
   - -c
   - sed -e 's|<<<IMAGE>>>|asia.gcr.io/$PROJECT_ID/fibonacci-server:$BUILD_ID|g' cd/deployment-template.yaml > cd/deployment.yaml
