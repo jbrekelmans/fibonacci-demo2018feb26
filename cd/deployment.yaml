@@ -23,7 +23,7 @@ spec:
       - env:
         - name: PORT
           value: '8080'
-        image: asia.gcr.io/decoded-petal-232806/fibonacci-server:94ee6ba6-a55f-4a41-825c-ab92a7f328ba
+        image: asia.gcr.io/decoded-petal-232806/fibonacci-server:72135557-bb4c-4148-97c8-ad78838b314c
         imagePullPolicy: Always
         name: fibonacci-server
         ports:
