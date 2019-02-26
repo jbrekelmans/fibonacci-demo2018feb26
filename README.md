@@ -1,5 +1,5 @@
 # Introduction
-Simple Fibonacci server that demonstrates GitOps-style CI/CD based on Google Cloud Build.
+Simple Fibonacci server that demonstrates GitOps-style CI/CD using Cloud Build and Google Kubernetes Engine.
 
 # Setup
 Cloud Build triggers need to be created as follows:
@@ -9,3 +9,4 @@ Cloud Build triggers need to be created as follows:
 
 A GKE cluster named `fibonacci-cluster` should exist in zone `australia-southeast1-a`.
 An initial deployment of `cd/ingress.yaml` and `cd/service.yaml` to the namespace `default` should exist.
+
