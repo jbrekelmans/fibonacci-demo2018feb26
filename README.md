@@ -14,6 +14,7 @@ Automated workflows as code
 During demo
   No management of agents and master required
     Runs on worker VMs managed by Google
+    Unlike Jenkins etc.
   YAML is not as easy to program as Jenkinsfile
     No conditional branching
     SemVer requires that you override entrypoints with /bin/sh so that you can cat
@@ -23,17 +24,10 @@ During demo
   Security
     Build runs with IAM service account
     Can use Google KMS to decrypt secrets for later use
-
-Difference with other CI tools
-  Manage master, plugins and agents
-    Groovy (Scripted Pipeline) OR Declaritve
-    Declarative
-    Jenkins Pipeline Plugin
-      Runs on master (node directive offloads works) 
-
+  Debugging builds locally
+  
 Conclusion
   Infrastructure side is really easy
   Rich ecosystem (docker)
   Heavily coupled with GCP????
   
-Debugging builds locally
