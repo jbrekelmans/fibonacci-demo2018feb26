@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     return;
   }
   if (n < 0n) {
-    res.status(400).type('text').send('Query string parameter "n" must represent a non-negative integer');
+    res.status(400).type('text').send('Query string parameter "n" must be a non-negative integer');
     return;
   }
   if (n > 999n) {
