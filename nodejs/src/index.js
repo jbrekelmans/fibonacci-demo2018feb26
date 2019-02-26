@@ -6,7 +6,6 @@ const app = express();
 
 app.get('/', (req, res) => {
   let n
-  let valid;
   try {
     n = BigInt(req.query.n);
   } catch (error) {
