@@ -6,9 +6,16 @@ const app = express();
 
 app.get('/', (req, res) => {
   let n
+  let valid = false;
   try {
     n = BigInt(req.query.n);
+    valid = true;
   } catch (error) {
+  }
+  if (n < 0n) {
+    valid = false;
+  }
+  if (!valid) {
     res.status(400).type('text').send('Query string parameter "n" is missing or invalid');
     return;
   }
