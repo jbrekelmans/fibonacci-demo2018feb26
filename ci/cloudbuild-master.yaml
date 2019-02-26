@@ -32,9 +32,9 @@ steps:
 
 
 
-##################
-# DEPLOYMENT
-##################
+##############
+# DEPLOYMENT #
+##############
 # Update git authentication so that we can commit and push to trigger the deployment
 - name: ubuntu
   entrypoint: bash
@@ -48,6 +48,8 @@ steps:
     URL=$$(git remote get-url origin --push)
     URL=https://$$(cat token.txt)@$${URL#https://}
     git remote set-url --push origin "$$URL"
+    git config user.email '834370812683@cloudbuild.gserviceaccount.com'
+    git config user.name cloudbuild
 # Update Kubernetes manifest
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/sh
@@ -58,6 +60,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args: ["add", "cd/deployment.yaml"]
 - name: 'gcr.io/cloud-builders/git'
+  entrypoint: bash
   args: ["commit", "-m", "deployment from build $BUILD_ID"]
 - name: 'gcr.io/cloud-builders/git'
   args: ["push", "origin", "master"]
