@@ -61,7 +61,6 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args: ["add", "cd/deployment.yaml"]
 - name: 'gcr.io/cloud-builders/git'
-  entrypoint: bash
   args: ["commit", "-m", "deployment from build $BUILD_ID"]
 - name: 'gcr.io/cloud-builders/git'
   args: ["push", "origin", "master"]
